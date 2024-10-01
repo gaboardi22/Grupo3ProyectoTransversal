@@ -1,8 +1,6 @@
 
 package EntidadesData;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Connection;
 import org.mariadb.jdbc.*;
@@ -15,7 +13,7 @@ import java.sql.*;
  */
 public class Conexion {
     
-    private static final String URL = "jdbc:mariadb://localhost/";
+    private static final String URL = "jdbc:mariadb://localhost:3306/";
     private static final String DB = "universidad";
     private static final String USUARIO = "root";
     private static final String PASSWORD  = "";
@@ -24,7 +22,7 @@ public class Conexion {
     private Conexion(){}
     
     public static Connection getConexion(){
-        if(connection != null){
+        if(connection == null){
             try {
                 Class.forName("org.mariadb.jdbc.Driver");
                 connection = (Connection) DriverManager.getConnection(URL + DB, USUARIO, PASSWORD);
