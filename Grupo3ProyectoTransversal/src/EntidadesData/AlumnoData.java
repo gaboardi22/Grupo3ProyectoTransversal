@@ -48,11 +48,11 @@ public class AlumnoData {
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, alumno.getDni());
-            ps.setString(2, alumno.getNombre());
+            ps.setString(2, alumno.getApellido());
             ps.setString(3, alumno.getNombre());
             ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));
             ps.setBoolean(5, alumno.isEstado());
-            ps.setInt(5, alumno.getIdAlumno());
+            ps.setInt(6, alumno.getIdAlumno());
            int exito =  ps.executeUpdate();
            if(exito == 1){
                JOptionPane.showMessageDialog(null, "alumno modificado con exito");
