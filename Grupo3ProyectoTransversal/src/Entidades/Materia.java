@@ -9,19 +9,19 @@ public class Materia {
     
     private int idMateria;
     private String nombre;
-    private int anioMateria;
+    private String cuatrimestre;
     private boolean estado;
 
-    public Materia(int idMateria, String nombre, int anioMateria, boolean estado) {
+    public Materia(int idMateria, String nombre, String cuatrimestre, boolean estado) {
         this.idMateria = idMateria;
         this.nombre = nombre;
-        this.anioMateria = anioMateria;
+        this.cuatrimestre = cuatrimestre;
         this.estado = estado;
     }
 
-    public Materia(String nombre, int anioMateria, boolean estado) {
+    public Materia(String nombre, String cuatrimestre, boolean estado) {
         this.nombre = nombre;
-        this.anioMateria = anioMateria;
+        this.cuatrimestre = cuatrimestre;
         this.estado = estado;
     }
 
@@ -44,12 +44,12 @@ public class Materia {
         this.nombre = nombre;
     }
 
-    public int getAnioMateria() {
-        return anioMateria;
+    public String getCuatrimestre() {
+        return cuatrimestre;
     }
 
-    public void setAnioMateria(int anioMateria) {
-        this.anioMateria = anioMateria;
+    public void setCuatrimestre(String cuatrimestre) {
+        this.cuatrimestre = cuatrimestre;
     }
 
     public boolean isEstado() {
@@ -62,8 +62,8 @@ public class Materia {
 
     @Override
     public String toString() {
-        return "Materia{" + "idMateria=" + idMateria + ", nombre=" + nombre + ", anioMateria=" + anioMateria + ", estado=" + estado + '}';
+        return "Materia{" + "idMateria=" + idMateria + ", nombre=" + nombre + ", cuatrimestre=" + cuatrimestre + ", estado=" + estado + '}';
     }
-    
-    
+
+   
 }
