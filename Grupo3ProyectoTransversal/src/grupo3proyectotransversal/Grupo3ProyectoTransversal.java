@@ -17,7 +17,8 @@ public class Grupo3ProyectoTransversal {
         Alumno pablo = new Alumno(1,29311374, "gabo", "pablo", LocalDate.of(1982, 03, 19), true);
         AlumnoData alu = new AlumnoData();
         //alu.guardarAlumno(pablo);
-        alu.modificarAlumno(pablo);
+        //alu.modificarAlumno(pablo);
+        alu.eliminarAlumno(1);
     }
     
 }
