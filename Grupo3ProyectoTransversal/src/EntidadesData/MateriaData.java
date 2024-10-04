@@ -15,7 +15,7 @@ public class MateriaData {
     private Connection conn = null;
     
     public MateriaData(){
-        conn = Conexion.getConexion();
+        this.conn = Conexion.getConexion();
     }
     
     public void guardarMateria(Materia materia){

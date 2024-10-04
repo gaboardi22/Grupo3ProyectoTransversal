@@ -1,7 +1,9 @@
 
 package EntidadesData;
 
-import org.mariadb.jdbc.Connection;
+import Entidades.Inscripcion;
+import org.mariadb.jdbc.Connection; 
+import java.sql.*;
 
 /**
  *
@@ -13,8 +15,10 @@ public class InscripcionData {
      private AlumnoData aluData;
 
     public InscripcionData() {
-        conn = Conexion.getConexion();
+        this.conn = Conexion.getConexion();
     }
      
-     
+     public void guardarInscripcion(Inscripcion inscripcion){
+         String sql = "";
+     }
 }
