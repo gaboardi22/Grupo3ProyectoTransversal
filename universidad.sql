@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-10-2024 a las 01:03:12
+-- Tiempo de generación: 04-10-2024 a las 02:27:08
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -43,7 +43,20 @@ CREATE TABLE `alumno` (
 --
 
 INSERT INTO `alumno` (`idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado`) VALUES
-(1, 1, 'gabo', 'pablo', '1982-03-19', 1);
+(1, 29311374, 'gabo', 'pablo', '1982-03-19', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `inscripcion`
+--
+
+CREATE TABLE `inscripcion` (
+  `idInscripcion` int(11) NOT NULL,
+  `nota` double NOT NULL,
+  `idAlumno` int(11) NOT NULL,
+  `idMateria` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -54,7 +67,7 @@ INSERT INTO `alumno` (`idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`
 CREATE TABLE `materia` (
   `idMateria` int(11) NOT NULL,
   `nombre` varchar(60) NOT NULL,
-  `anioMateria` int(11) NOT NULL,
+  `cuatrimestre` varchar(50) NOT NULL,
   `estado` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -68,6 +81,14 @@ CREATE TABLE `materia` (
 ALTER TABLE `alumno`
   ADD PRIMARY KEY (`idAlumno`),
   ADD UNIQUE KEY `dni` (`dni`);
+
+--
+-- Indices de la tabla `inscripcion`
+--
+ALTER TABLE `inscripcion`
+  ADD PRIMARY KEY (`idInscripcion`),
+  ADD KEY `idAlumno` (`idAlumno`),
+  ADD KEY `idMateria` (`idMateria`);
 
 --
 -- Indices de la tabla `materia`
@@ -86,10 +107,27 @@ ALTER TABLE `alumno`
   MODIFY `idAlumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT de la tabla `inscripcion`
+--
+ALTER TABLE `inscripcion`
+  MODIFY `idInscripcion` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
   MODIFY `idMateria` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `inscripcion`
+--
+ALTER TABLE `inscripcion`
+  ADD CONSTRAINT `inscripcion_ibfk_1` FOREIGN KEY (`idAlumno`) REFERENCES `alumno` (`idAlumno`),
+  ADD CONSTRAINT `inscripcion_ibfk_2` FOREIGN KEY (`idMateria`) REFERENCES `materia` (`idMateria`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
