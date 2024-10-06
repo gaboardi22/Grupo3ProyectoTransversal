@@ -4,12 +4,18 @@
  */
 package vistas;
 
+import Entidades.Materia;
+import EntidadesData.MateriaData;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Usuario
  */
 public class MateriasVista extends javax.swing.JInternalFrame {
-
+    MateriaData materia = new MateriaData();
+    private Materia mActual = null;
+    
     /**
      * Creates new form Materias
      */
@@ -57,6 +63,11 @@ public class MateriasVista extends javax.swing.JInternalFrame {
 
         jBGuardarMateria.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jBGuardarMateria.setText("Guardar");
+        jBGuardarMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardarMateriaActionPerformed(evt);
+            }
+        });
 
         jBSalirMateria.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jBSalirMateria.setText("Salir");
@@ -68,9 +79,19 @@ public class MateriasVista extends javax.swing.JInternalFrame {
 
         jBEliminarMateria.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jBEliminarMateria.setText("Eliminar");
+        jBEliminarMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarMateriaActionPerformed(evt);
+            }
+        });
 
         jBNuevoMateria.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jBNuevoMateria.setText("Nuevo");
+        jBNuevoMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBNuevoMateriaActionPerformed(evt);
+            }
+        });
 
         jBBuscarMateria.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jBBuscarMateria.setText("Buscar");
@@ -164,12 +185,69 @@ public class MateriasVista extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBBuscarMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarMateriaActionPerformed
-        // TODO add your handling code here:
+        try{
+            Integer id = Integer.parseInt(jTFCodMateria.getText());
+            mActual = materia.buscarMateria(id);
+            if (mActual!=null){
+              jTFNomMateria.setText(mActual.getNombre());
+              String m = String.valueOf( mActual.getIdMateria());
+              jTFCodMateria.setText(m);
+              jTFCuatri.setText(mActual.getCuatrimestre());
+              jRBEstadoMateria.setSelected(mActual.isEstado()); 
+            }
+        }catch(NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "El codigo debe ser un número", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jBBuscarMateriaActionPerformed
 
     private void jBSalirMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirMateriaActionPerformed
          dispose();
     }//GEN-LAST:event_jBSalirMateriaActionPerformed
+
+    private void jBNuevoMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoMateriaActionPerformed
+        jTFCodMateria.setText("");
+        jTFNomMateria.setText("");
+        jTFCuatri.setText("");
+        jRBEstadoMateria.setSelected(true);
+        mActual = null;
+    }//GEN-LAST:event_jBNuevoMateriaActionPerformed
+
+    private void jBGuardarMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarMateriaActionPerformed
+        try{
+            Integer cod = Integer.parseInt(jTFCodMateria.getText());
+            String nom = jTFNomMateria.getText().trim();
+            String cua = jTFCuatri.getText().trim();
+            if (nom.isEmpty() || cua.isEmpty()){
+                JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
+            return;}
+            boolean e = jRBEstadoMateria.isSelected();
+            if (mActual == null){
+                mActual = new Materia(nom,cua,e);
+                materia.guardarMateria(mActual);
+            } else {
+                mActual.setIdMateria(cod);
+                mActual.setNombre(nom);
+                mActual.setCuatrimestre(cua);
+                mActual.setEstado(e);
+                materia.modificarMateria(mActual);
+            }
+        } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "El codigo debe ser un número valido", "Error", JOptionPane.ERROR_MESSAGE);
+        } 
+    }//GEN-LAST:event_jBGuardarMateriaActionPerformed
+
+    private void jBEliminarMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarMateriaActionPerformed
+        if (mActual != null){
+            materia.eliminarMateria(mActual.getIdMateria());
+            mActual = null;
+            jTFCodMateria.setText("");
+            jTFNomMateria.setText("");
+            jTFCuatri.setText("");
+            jRBEstadoMateria.setSelected(true);
+        } else {
+           JOptionPane.showMessageDialog(this, "No se busco una materia a eliminar");
+       }
+    }//GEN-LAST:event_jBEliminarMateriaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

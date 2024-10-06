@@ -191,7 +191,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMIConsuXmateriaActionPerformed
 
     private void jMSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMSalirActionPerformed
-         dispose();
+         System.exit(0);
     }//GEN-LAST:event_jMSalirActionPerformed
 
     /**

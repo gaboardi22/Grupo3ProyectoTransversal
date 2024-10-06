@@ -4,12 +4,21 @@
  */
 package vistas;
 
+import Entidades.Alumno;
+import EntidadesData.AlumnoData;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Usuario
  */
 public class AlumnosVista extends javax.swing.JInternalFrame {
-
+    private Alumno aluActual = null;
+    AlumnoData alu = new AlumnoData();
+    
     /**
      * Creates new form Alumnos
      */
@@ -42,6 +51,7 @@ public class AlumnosVista extends javax.swing.JInternalFrame {
         jBSalirAlum = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jRBEstadoAlum = new javax.swing.JRadioButton();
+        jDateCFecha = new com.toedter.calendar.JDateChooser();
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -60,12 +70,22 @@ public class AlumnosVista extends javax.swing.JInternalFrame {
 
         jBEliminarAlum.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jBEliminarAlum.setText("Eliminar");
+        jBEliminarAlum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarAlumActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel3.setText("Apellido:");
 
         jBNuevoAlum.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jBNuevoAlum.setText("Nuevo");
+        jBNuevoAlum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBNuevoAlumActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel4.setText("Documento:");
@@ -112,10 +132,9 @@ public class AlumnosVista extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jSeparator1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jLabel4)
@@ -136,6 +155,8 @@ public class AlumnosVista extends javax.swing.JInternalFrame {
                                         .addComponent(jBBuscarAlum))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
+                                .addGap(33, 33, 33)
+                                .addComponent(jDateCFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -171,7 +192,9 @@ public class AlumnosVista extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5)
                     .addComponent(jRBEstadoAlum))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(jDateCFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBSalirAlum)
@@ -185,16 +208,75 @@ public class AlumnosVista extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBBuscarAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarAlumActionPerformed
-        // TODO add your handling code here:
+       try{
+           Integer dni = Integer.parseInt(jTFDocAlum.getText());
+           aluActual = alu.buscarAlumnoPorDni(dni);
+           if (aluActual!=null){
+               jTFNomAlum.setText(aluActual.getNombre());
+               jTFApellidoAlum.setText(aluActual.getApellido());
+               jRBEstadoAlum.setSelected(aluActual.isEstado());
+               LocalDate fn = aluActual.getFechaNacimiento();
+               java.util.Date d = java.util.Date.from(fn.atStartOfDay(ZoneId.systemDefault()).toInstant());
+               jDateCFecha.setDate(d);
+           }
+       } catch(NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "El DNI debe ser un número", "Error", JOptionPane.ERROR_MESSAGE);
+       }
     }//GEN-LAST:event_jBBuscarAlumActionPerformed
 
     private void jBGuardarAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarAlumActionPerformed
-        // TODO add your handling code here:
+       try{
+        Integer dni = Integer.parseInt(jTFDocAlum.getText());
+        String nom = jTFNomAlum.getText().trim();
+        String ap = jTFApellidoAlum.getText().trim();
+        if (nom.isEmpty() || ap.isEmpty()){
+            JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
+           return;
+        }
+        boolean estado = jRBEstadoAlum.isSelected();
+        Date fecha = jDateCFecha.getDate();
+        LocalDate lD = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        if (aluActual == null) {
+                aluActual = new Alumno(dni, nom, ap, lD, estado);
+                alu.guardarAlumno(aluActual);
+            } else {
+                aluActual.setDni(dni);
+                aluActual.setNombre(nom);
+                aluActual.setApellido(ap);
+                aluActual.setFechaNacimiento(lD);
+                alu.modificarAlumno(aluActual);
+            }
+        } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "El DNI debe ser un número valido", "Error", JOptionPane.ERROR_MESSAGE);
+        } 
     }//GEN-LAST:event_jBGuardarAlumActionPerformed
 
     private void jBSalirAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirAlumActionPerformed
          dispose();
     }//GEN-LAST:event_jBSalirAlumActionPerformed
+
+    private void jBNuevoAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoAlumActionPerformed
+        jTFDocAlum.setText("");
+        jTFNomAlum.setText("");
+        jTFApellidoAlum.setText("");
+        jRBEstadoAlum.setSelected(true);
+        jDateCFecha.setDate(new Date());
+        aluActual = null;
+    }//GEN-LAST:event_jBNuevoAlumActionPerformed
+
+    private void jBEliminarAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarAlumActionPerformed
+       if (aluActual!=null){
+           alu.eliminarAlumno(aluActual.getIdAlumno());
+           aluActual = null;
+           jTFDocAlum.setText("");
+           jTFNomAlum.setText("");
+           jTFApellidoAlum.setText("");
+           jRBEstadoAlum.setSelected(true);
+           jDateCFecha.setDate(new Date());
+       } else {
+           JOptionPane.showMessageDialog(this, "No se busco un alumno a eliminar");
+       }
+    }//GEN-LAST:event_jBEliminarAlumActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -203,6 +285,7 @@ public class AlumnosVista extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBGuardarAlum;
     private javax.swing.JButton jBNuevoAlum;
     private javax.swing.JButton jBSalirAlum;
+    private com.toedter.calendar.JDateChooser jDateCFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
