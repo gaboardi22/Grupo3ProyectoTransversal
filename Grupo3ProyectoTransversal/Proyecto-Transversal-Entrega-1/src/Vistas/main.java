@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package vista;
+package Vistas;
 
 import java.time.LocalDate;
-import modelo.Alumno;
+import Entidades.Alumno;
 import org.mariadb.jdbc.Connection;
-import persistencia.AlumnoData;
-import persistencia.Conexion;
+import AccesoADatos.AlumnoData;
+import AccesoADatos.Conexion;
 
 /**
  *
