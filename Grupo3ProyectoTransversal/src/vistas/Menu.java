@@ -1,15 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package vistas;
 
-import com.formdev.flatlaf.intellijthemes.FlatGradiantoMidnightBlueIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatVuesionIJTheme;
+import com.formdev.flatlaf.*;
+import com.formdev.flatlaf.intellijthemes.*;
+
 
 /**
  *
- * @author Usuario
+ * @author Grupo 3
  */
 public class Menu extends javax.swing.JFrame {
 
