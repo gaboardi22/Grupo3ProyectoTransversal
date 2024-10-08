@@ -9,8 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import Entidades.Alumno;
 import org.mariadb.jdbc.Connection;
 
@@ -52,7 +50,7 @@ public class AlumnoData {
     }
 
     public void modificarAlumno(Alumno alumno) {
-        String sql = "UPDATE alumno SET dni = ?,apellido = ?, nombre = ?,fechaNacimiento = ?"
+        String sql = "UPDATE alumnos SET dni = ?,apellido = ?, nombre = ?,fechaNacimiento = ?"
                 + " WHERE idAlumno = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -72,22 +70,21 @@ public class AlumnoData {
             System.out.println("Error al acceder a la tabla alumnos");
         }
     }
-    
-    public void buscarAlumno(int id){
+
+    public void buscarAlumno(int id) {
         String sql = "SELECT * "
                 + "FROM alumnos "
                 + "WHERE idAlumno = ?";
-        
-        
+
         try {
             PreparedStatement ps;
             ps = conn.prepareStatement(sql);
-            ps.setInt(1,id);
-            ResultSet rs=ps.executeQuery();
-            if(rs.next()){
-            System.out.println("Datos del Alumno:");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                System.out.println("Datos del Alumno:");
                 System.out.println("ID: " + rs.getInt("idAlumno"));
-                System.out.println("ID: "+ rs.getInt("dni"));
+                System.out.println("DNI: " + rs.getInt("dni"));
                 System.out.println("Nombre: " + rs.getString("nombre"));
                 System.out.println("Apellido: " + rs.getString("apellido"));
                 System.out.println("Fecha de nacimiento: " + rs.getDate("fechaNac"));
@@ -98,13 +95,11 @@ public class AlumnoData {
             System.out.println("Error al acceder a la tabla alumnos");
         }
 
-        
-        
     }
-    
-    public void bajaLogica(int id){
-    String sql = "UPDATE alumno SET estado = 0 "
-            + "WHERE idAlumno = ?";
+
+    public void bajaLogica(int id) {
+        String sql = "UPDATE alumnos SET estado = 0 "
+                + "WHERE idAlumno = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
@@ -115,10 +110,10 @@ public class AlumnoData {
             System.out.println("Error al acceder a la tabla alumnos");
         }
     }
-    
-    public void altaLogica(int id){
-    String sql = "UPDATE alumno SET estado = 1 "
-            + "WHERE idAlumno = ?";
+
+    public void altaLogica(int id) {
+        String sql = "UPDATE alumnos SET estado = 1 "
+                + "WHERE idAlumno = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
@@ -129,8 +124,8 @@ public class AlumnoData {
             System.out.println("Error al acceder a la tabla alumnos");
         }
     }
-    
-    public void eliminarAlumno(int id){
+
+    public void eliminarAlumno(int id) {
         String sql = "DELETE FROM alumnos WHERE `alumnos`.`idAlumno` = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
