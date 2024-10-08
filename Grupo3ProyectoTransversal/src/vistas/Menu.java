@@ -223,13 +223,13 @@ public class Menu extends javax.swing.JFrame {
 //                new Menu().setVisible(true);
 //            }
 //        });
-        FlatVuesionIJTheme.setup();
+        FlatArcOrangeIJTheme.setup();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new Menu().setVisible(true);
     });
-        FlatGradiantoMidnightBlueIJTheme.setup();
+        FlatArcOrangeIJTheme.setup();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
