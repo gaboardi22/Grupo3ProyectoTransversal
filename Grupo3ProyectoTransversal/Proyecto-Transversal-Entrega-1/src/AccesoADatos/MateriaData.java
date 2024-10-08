@@ -115,4 +115,16 @@ public class MateriaData {
         }
     }
 
+    public void eliminarMateria(int id) {
+        String sql = "DELETE FROM materia WHERE `materia`.`idMateria` = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            ps.close();
+            System.out.println("Materia borrada de la base de datos");
+        } catch (SQLException ex) {
+            System.out.println("Error al acceder a la tabla materia");
+        }
+    }
 }
