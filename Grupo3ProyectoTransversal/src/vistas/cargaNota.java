@@ -35,6 +35,10 @@ public class cargaNota extends javax.swing.JInternalFrame {
         jCBoxNotas = new javax.swing.JComboBox<>();
         jBSalirNotas = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel1.setText("Carga de notas");
 

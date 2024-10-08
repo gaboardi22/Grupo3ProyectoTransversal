@@ -45,6 +45,10 @@ public class MateriasVista extends javax.swing.JInternalFrame {
         jBBuscarMateria = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+
         jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel4.setText("Codigo:");
 

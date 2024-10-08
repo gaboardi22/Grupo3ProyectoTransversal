@@ -50,6 +50,10 @@ public class AlumnosVista extends javax.swing.JInternalFrame {
         jRBEstadoAlum = new javax.swing.JRadioButton();
         jDateCFecha = new com.toedter.calendar.JDateChooser();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Alumno");
@@ -148,7 +152,7 @@ public class AlumnosVista extends javax.swing.JInternalFrame {
                                             .addComponent(jTFNomAlum)
                                             .addComponent(jTFApellidoAlum)
                                             .addComponent(jTFDocAlum, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                                         .addComponent(jBBuscarAlum))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)

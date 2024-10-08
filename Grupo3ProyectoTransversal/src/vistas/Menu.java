@@ -53,7 +53,7 @@ public class Menu extends javax.swing.JFrame {
         );
         jDPMenuLayout.setVerticalGroup(
             jDPMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 337, Short.MAX_VALUE)
+            .addGap(0, 346, Short.MAX_VALUE)
         );
 
         jMAlumno.setText("Alumno");
@@ -135,9 +135,7 @@ public class Menu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jDPMenu)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jDPMenu)
         );
 
         pack();

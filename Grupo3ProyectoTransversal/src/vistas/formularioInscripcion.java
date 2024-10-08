@@ -39,6 +39,10 @@ public class formularioInscripcion extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+
         jCBoxInscrip.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jRBMateriasInscrip.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N

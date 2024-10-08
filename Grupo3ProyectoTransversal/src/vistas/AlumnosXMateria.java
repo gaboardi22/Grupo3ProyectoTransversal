@@ -34,6 +34,10 @@ public class AlumnosXMateria extends javax.swing.JInternalFrame {
         jCBoxAlumXmateria = new javax.swing.JComboBox<>();
         jBSalirAxM = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Listado de alumnos por materia ");
