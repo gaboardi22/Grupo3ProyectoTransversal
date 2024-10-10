@@ -32,10 +32,17 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         jLDNI = new javax.swing.JLabel();
         jLFechaNac = new javax.swing.JLabel();
         jLEstado = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jTFDNI = new javax.swing.JTextField();
+        jTFNombre = new javax.swing.JTextField();
+        jTFApellido = new javax.swing.JTextField();
+        jRBEstado = new javax.swing.JRadioButton();
+        jDCFechaDeNacimiento = new com.toedter.calendar.JDateChooser();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+
+        setClosable(true);
 
         jLNombre.setText("Nombre: ");
 
@@ -47,63 +54,94 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
 
         jLEstado.setText("Estado: ");
 
-        jTextField1.setText("jTextField1");
+        jTFDNI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFDNIActionPerformed(evt);
+            }
+        });
 
-        jTextField2.setText("jTextField2");
+        jButton1.setText("jButton1");
 
-        jTextField3.setText("jTextField3");
+        jButton2.setText("jButton2");
 
-        jRadioButton1.setText("jRadioButton1");
+        jButton3.setText("jButton3");
+
+        jButton4.setText("jButton4");
 
         javax.swing.GroupLayout jPFondoLayout = new javax.swing.GroupLayout(jPFondo);
         jPFondo.setLayout(jPFondoLayout);
         jPFondoLayout.setHorizontalGroup(
             jPFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPFondoLayout.createSequentialGroup()
+                .addGap(0, 104, Short.MAX_VALUE)
+                .addGroup(jPFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPFondoLayout.createSequentialGroup()
+                        .addComponent(jLNombre)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPFondoLayout.createSequentialGroup()
+                        .addComponent(jLDNI)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTFDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPFondoLayout.createSequentialGroup()
+                        .addComponent(jLApellido)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTFApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(47, 47, 47))
             .addGroup(jPFondoLayout.createSequentialGroup()
                 .addGroup(jPFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPFondoLayout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(jLEstado)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton1))
-                    .addGroup(jPFondoLayout.createSequentialGroup()
-                        .addGap(53, 53, 53)
+                        .addGap(38, 38, 38)
                         .addGroup(jPFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLNombre)
-                            .addComponent(jLApellido)
-                            .addComponent(jLDNI))
+                            .addComponent(jLEstado)
+                            .addComponent(jLFechaNac))
                         .addGap(18, 18, 18)
-                        .addGroup(jPFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3))))
-                .addContainerGap(98, Short.MAX_VALUE))
-            .addGroup(jPFondoLayout.createSequentialGroup()
-                .addComponent(jLFechaNac)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(jPFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRBEstado)
+                            .addComponent(jDCFechaDeNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPFondoLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4)))
+                .addContainerGap())
         );
         jPFondoLayout.setVerticalGroup(
             jPFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPFondoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLDNI)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLDNI))
                 .addGap(18, 18, 18)
                 .addGroup(jPFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLNombre)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLNombre))
                 .addGap(18, 18, 18)
                 .addGroup(jPFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLApellido)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLApellido))
                 .addGap(18, 18, 18)
-                .addComponent(jLFechaNac)
-                .addGap(9, 9, 9)
+                .addGroup(jPFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPFondoLayout.createSequentialGroup()
+                        .addComponent(jDCFechaDeNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRBEstado)
+                            .addComponent(jLEstado)))
+                    .addComponent(jLFechaNac))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(jPFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLEstado)
-                    .addComponent(jRadioButton1))
-                .addContainerGap(102, Short.MAX_VALUE))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -120,17 +158,25 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTFDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFDNIActionPerformed
+    }//GEN-LAST:event_jTFDNIActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private com.toedter.calendar.JDateChooser jDCFechaDeNacimiento;
     private javax.swing.JLabel jLApellido;
     private javax.swing.JLabel jLDNI;
     private javax.swing.JLabel jLEstado;
     private javax.swing.JLabel jLFechaNac;
     private javax.swing.JLabel jLNombre;
     private javax.swing.JPanel jPFondo;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JRadioButton jRBEstado;
+    private javax.swing.JTextField jTFApellido;
+    private javax.swing.JTextField jTFDNI;
+    private javax.swing.JTextField jTFNombre;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,6 +4,8 @@
  */
 package Vistas;
 
+import javax.swing.*;
+
 /**
  *
  * @author Ezequiel
@@ -30,7 +32,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        fondo = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMAlumnos = new javax.swing.JMenu();
         jMMateria = new javax.swing.JMenu();
@@ -45,18 +47,23 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout fondoLayout = new javax.swing.GroupLayout(fondo);
+        fondo.setLayout(fondoLayout);
+        fondoLayout.setHorizontalGroup(
+            fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        fondoLayout.setVerticalGroup(
+            fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 277, Short.MAX_VALUE)
         );
 
         jMAlumnos.setText("Alumnos");
+        jMAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMAlumnosMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMAlumnos);
 
         jMMateria.setText("Materia");
@@ -68,15 +75,24 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(fondo)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(fondo)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMAlumnosMouseClicked
+        fondo.removeAll();
+        fondo.repaint();
+        VistaAlumno va  = new VistaAlumno();
+        va.setVisible(true);
+        fondo.add(va);
+        fondo.moveToFront(va);
+    }//GEN-LAST:event_jMAlumnosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -114,7 +130,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane fondo;
     private javax.swing.JMenu jMAlumnos;
     private javax.swing.JMenu jMMateria;
     private javax.swing.JMenu jMenu3;
