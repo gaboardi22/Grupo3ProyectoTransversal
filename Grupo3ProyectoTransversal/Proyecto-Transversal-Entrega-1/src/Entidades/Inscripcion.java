@@ -20,6 +20,9 @@ public class Inscripcion {
         this.nota = nota;
     }
 
+    public Inscripcion() {
+    }
+
     public int getIdInscripcion() {
         return idInscripcion;
     }

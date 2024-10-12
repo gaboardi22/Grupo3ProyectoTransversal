@@ -44,27 +44,30 @@ public class MateriaData {
 
     }
 
-    public void buscarMateria(int id) {
+    public Materia buscarMateria(int id) {
         String sql = "SELECT * "
                 + "FROM materia "
                 + "WHERE idMateria = ?";
-
+        Materia mat = null;
         try {
             PreparedStatement ps;
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                System.out.println("Datos de la Materia:");
-                System.out.println("ID: " + rs.getInt("idMateria"));
-                System.out.println("DNI: " + rs.getString("nombre"));
-                System.out.println("Nombre: " + rs.getInt("anio"));
+                mat = new Materia();
+                mat.setIdMateria(rs.getInt("idMateria"));
+                mat.setNombre(rs.getString("nombre"));
+                mat.setAnio(rs.getInt("anio"));
+                mat.setEstado(rs.getBoolean("estado"));
+            }else{
+                System.out.println("No existe ese alumno");
             }
             ps.close();
         } catch (SQLException ex) {
             System.out.println("Error al acceder a la tabla materia");
         }
-
+        return mat;
     }
 
     public void modificarMateria(Materia materia) {
