@@ -20,6 +20,14 @@ public class Inscripcion {
         this.nota = nota;
     }
 
+    public int getIdInscripcion() {
+        return idInscripcion;
+    }
+
+    public void setIdInscripcion(int idInscripcion) {
+        this.idInscripcion = idInscripcion;
+    }
+
     public Alumno getAlumno() {
         return alumno;
     }

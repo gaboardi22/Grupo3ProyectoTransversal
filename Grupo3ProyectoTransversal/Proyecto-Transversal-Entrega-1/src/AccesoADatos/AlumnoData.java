@@ -71,10 +71,11 @@ public class AlumnoData {
         }
     }
 
-    public void buscarAlumno(int id) {
+    public Alumno buscarAlumno(int id) {
         String sql = "SELECT * "
                 + "FROM alumnos "
                 + "WHERE idAlumno = ?";
+        Alumno alumno = null;
 
         try {
             PreparedStatement ps;
@@ -82,19 +83,22 @@ public class AlumnoData {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                System.out.println("Datos del Alumno:");
-                System.out.println("ID: " + rs.getInt("idAlumno"));
-                System.out.println("DNI: " + rs.getInt("dni"));
-                System.out.println("Nombre: " + rs.getString("nombre"));
-                System.out.println("Apellido: " + rs.getString("apellido"));
-                System.out.println("Fecha de nacimiento: " + rs.getDate("fechaNac"));
-                System.out.println("Estado: " + rs.getBoolean("estado"));
+                alumno = new Alumno();
+                alumno.setDni(id);
+                alumno.setDni(rs.getInt("dni"));
+                alumno.setApellido(rs.getString("apellido"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
+                alumno.setEstado(rs.getBoolean("estado"));
+
+            }else{
+                System.out.println("No existe ese alumno");
             }
             ps.close();
         } catch (SQLException ex) {
             System.out.println("Error al acceder a la tabla alumnos");
         }
-
+        return alumno;
     }
 
     public void bajaLogica(int id) {
