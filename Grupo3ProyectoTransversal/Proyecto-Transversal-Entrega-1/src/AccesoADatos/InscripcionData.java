@@ -24,7 +24,7 @@ public class InscripcionData {
         this.conn = Conexion.getConexion();
     }
 
-    public void guardarMateria(Inscripcion inscripcion) {
+    public void guardarInscripcion(Inscripcion inscripcion) {
         String sql = "INSERT INTO `inscripcion`(`idAlumno`, `idMateria`, `nota`) "
                 + "VALUES (?, ?, ?)";
         try {
