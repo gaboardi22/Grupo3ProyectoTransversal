@@ -28,22 +28,18 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
         fondo = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMAlumnos = new javax.swing.JMenu();
+        jMIFormAlumno = new javax.swing.JMenuItem();
         jMMateria = new javax.swing.JMenu();
-
-        jMenuItem1.setText("jMenuItem1");
-
-        jMenu3.setText("File");
-        jMenuBar2.add(jMenu3);
-
-        jMenu4.setText("Edit");
-        jMenuBar2.add(jMenu4);
+        JMIFormMateria = new javax.swing.JMenuItem();
+        Administracion = new javax.swing.JMenu();
+        jMIManDeInscripciones = new javax.swing.JMenuItem();
+        jMIManDeNotas = new javax.swing.JMenuItem();
+        JMConsultas = new javax.swing.JMenu();
+        jMIAlumnoPorMateria = new javax.swing.JMenuItem();
+        JMSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,19 +51,52 @@ public class Principal extends javax.swing.JFrame {
         );
         fondoLayout.setVerticalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 278, Short.MAX_VALUE)
         );
 
         jMAlumnos.setText("Alumnos");
-        jMAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMAlumnosMouseClicked(evt);
+
+        jMIFormAlumno.setText("Formulario de alumno");
+        jMIFormAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIFormAlumnoActionPerformed(evt);
             }
         });
+        jMAlumnos.add(jMIFormAlumno);
+
         jMenuBar1.add(jMAlumnos);
 
         jMMateria.setText("Materia");
+
+        JMIFormMateria.setText("Formulario de materia");
+        jMMateria.add(JMIFormMateria);
+
         jMenuBar1.add(jMMateria);
+
+        Administracion.setText("Administración");
+
+        jMIManDeInscripciones.setText("Manejo de inscripciones");
+        Administracion.add(jMIManDeInscripciones);
+
+        jMIManDeNotas.setText("Manipulación de notas");
+        Administracion.add(jMIManDeNotas);
+
+        jMenuBar1.add(Administracion);
+
+        JMConsultas.setText("Consultas");
+
+        jMIAlumnoPorMateria.setText("Alumnos por materia");
+        JMConsultas.add(jMIAlumnoPorMateria);
+
+        jMenuBar1.add(JMConsultas);
+
+        JMSalir.setText("Salir");
+        JMSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JMSalirMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(JMSalir);
 
         setJMenuBar(jMenuBar1);
 
@@ -85,14 +114,19 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMAlumnosMouseClicked
+    private void jMIFormAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFormAlumnoActionPerformed
         fondo.removeAll();
         fondo.repaint();
         VistaAlumno va  = new VistaAlumno();
         va.setVisible(true);
         fondo.add(va);
-        fondo.moveToFront(va);
-    }//GEN-LAST:event_jMAlumnosMouseClicked
+        fondo.moveToFront(va);        // TODO add your handling code here:
+    }//GEN-LAST:event_jMIFormAlumnoActionPerformed
+
+    private void JMSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JMSalirMouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_JMSalirMouseClicked
 
     /**
      * @param args the command line arguments
@@ -130,13 +164,17 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu Administracion;
+    private javax.swing.JMenu JMConsultas;
+    private javax.swing.JMenuItem JMIFormMateria;
+    private javax.swing.JMenu JMSalir;
     private javax.swing.JDesktopPane fondo;
     private javax.swing.JMenu jMAlumnos;
+    private javax.swing.JMenuItem jMIAlumnoPorMateria;
+    private javax.swing.JMenuItem jMIFormAlumno;
+    private javax.swing.JMenuItem jMIManDeInscripciones;
+    private javax.swing.JMenuItem jMIManDeNotas;
     private javax.swing.JMenu jMMateria;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }
