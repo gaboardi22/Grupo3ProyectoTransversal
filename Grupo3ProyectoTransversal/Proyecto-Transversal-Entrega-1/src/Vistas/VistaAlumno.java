@@ -43,8 +43,6 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         jBSalir = new javax.swing.JButton();
         jLAlumno = new javax.swing.JLabel();
 
-        setClosable(true);
-
         jLNombre.setText("Nombre: ");
 
         jLApellido.setText("Apellido: ");

@@ -4,7 +4,16 @@
  */
 package Vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import javax.swing.*;
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatGitHubDarkIJTheme;
+import java.awt.geom.Arc2D;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
 
 /**
  *
@@ -28,7 +37,13 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        fondo = new javax.swing.JDesktopPane();
+        ImageIcon icono = new ImageIcon(getClass().getResource("/recursos/universidad.png"));
+        Image miImagen=icono.getImage();
+        fondo = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(miImagen,0,0,getWidth(),getHeight(),this);
+            }
+        };
         jMenuBar1 = new javax.swing.JMenuBar();
         jMAlumnos = new javax.swing.JMenu();
         jMIFormAlumno = new javax.swing.JMenuItem();
@@ -42,6 +57,7 @@ public class Principal extends javax.swing.JFrame {
         JMSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1142, 643));
 
         javax.swing.GroupLayout fondoLayout = new javax.swing.GroupLayout(fondo);
         fondo.setLayout(fondoLayout);
@@ -51,10 +67,10 @@ public class Principal extends javax.swing.JFrame {
         );
         fondoLayout.setVerticalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 278, Short.MAX_VALUE)
+            .addGap(0, 448, Short.MAX_VALUE)
         );
 
-        jMAlumnos.setText("Alumnos");
+        jMAlumnos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/alumno.png"))); // NOI18N
 
         jMIFormAlumno.setText("Formulario de alumno");
         jMIFormAlumno.addActionListener(new java.awt.event.ActionListener() {
@@ -66,14 +82,19 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMAlumnos);
 
-        jMMateria.setText("Materia");
+        jMMateria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/materia.png"))); // NOI18N
 
         JMIFormMateria.setText("Formulario de materia");
+        JMIFormMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMIFormMateriaActionPerformed(evt);
+            }
+        });
         jMMateria.add(JMIFormMateria);
 
         jMenuBar1.add(jMMateria);
 
-        Administracion.setText("Administración");
+        Administracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/administracion.png"))); // NOI18N
 
         jMIManDeInscripciones.setText("Manejo de inscripciones");
         Administracion.add(jMIManDeInscripciones);
@@ -83,14 +104,14 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(Administracion);
 
-        JMConsultas.setText("Consultas");
+        JMConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/consulta.png"))); // NOI18N
 
         jMIAlumnoPorMateria.setText("Alumnos por materia");
         JMConsultas.add(jMIAlumnoPorMateria);
 
         jMenuBar1.add(JMConsultas);
 
-        JMSalir.setText("Salir");
+        JMSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/salir.png"))); // NOI18N
         JMSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 JMSalirMouseClicked(evt);
@@ -128,6 +149,15 @@ public class Principal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_JMSalirMouseClicked
 
+    private void JMIFormMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIFormMateriaActionPerformed
+        fondo.removeAll();
+        fondo.repaint();
+        VistaMateria vm = new VistaMateria();
+        vm.setVisible(true);
+        fondo.add(vm);
+        fondo.moveToFront(vm);
+    }//GEN-LAST:event_JMIFormMateriaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -154,13 +184,18 @@ public class Principal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        try {
+            UIManager.setLookAndFeel(new FlatGitHubDarkIJTheme());
+        } catch (UnsupportedLookAndFeelException ex) {
+            System.out.println("Error al establecer el tema");
+        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Principal().setVisible(true);
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

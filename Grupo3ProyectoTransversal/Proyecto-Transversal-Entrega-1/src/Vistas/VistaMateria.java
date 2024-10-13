@@ -60,6 +60,11 @@ public class VistaMateria extends javax.swing.JInternalFrame {
         });
 
         jBSalir.setText("Salir");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
+            }
+        });
 
         jBGuardar.setText("Guardar");
 
@@ -150,6 +155,10 @@ public class VistaMateria extends javax.swing.JInternalFrame {
     private void jTFCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFCodigoActionPerformed
+
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jBSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
