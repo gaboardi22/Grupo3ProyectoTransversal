@@ -22,7 +22,7 @@ public class Conexion {
     private Conexion(){}
     
     public static Connection getConexion(){
-        if(connection == null){
+        if(connection == null || connection.isClosed()){
             try {
                 Class.forName("org.mariadb.jdbc.Driver");
                 connection = (Connection) DriverManager.getConnection(URL + DB, USUARIO, PASSWORD);

@@ -3,6 +3,7 @@ package grupo3proyectotransversal;
 
 import Entidades.Alumno;
 import EntidadesData.AlumnoData;
+import EntidadesData.InscripcionData;
 import java.time.LocalDate;
 import vistas.formularioInscripcion;
 
@@ -19,8 +20,11 @@ public class Grupo3ProyectoTransversal {
         AlumnoData alu = new AlumnoData();
         //alu.guardarAlumno(pablo);
         //alu.modificarAlumno(pablo);
-        alu.eliminarAlumno(1);
-        alu.listarAlumnos();
+//        alu.eliminarAlumno(1);
+        System.out.println( alu.listarAlumnos());
+        InscripcionData d = new InscripcionData();
+        System.out.println(d.obtenerMateriasCursadas(2));
+        System.out.println(d.obtenerMateriasNoCursadas(2));
     }
     
 }

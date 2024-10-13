@@ -210,16 +210,16 @@ public class formularioInscripcion extends javax.swing.JInternalFrame {
        borrarFila();
        jRBMateriasNoInscrip.setSelected(false);
        cargaMateriasIns();
-       jBInscribirse.setEnabled(true);
-       jBAnularInscrip.setEnabled(false);
+       jBInscribirse.setEnabled(false);
+       jBAnularInscrip.setEnabled(true);
     }//GEN-LAST:event_jRBMateriasInscripActionPerformed
 
     private void jRBMateriasNoInscripActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBMateriasNoInscripActionPerformed
        borrarFila();
        jRBMateriasInscrip.setSelected(false);
        cargaMateriasNoIns();
-       jBInscribirse.setEnabled(false);
-       jBAnularInscrip.setEnabled(true);
+       jBInscribirse.setEnabled(true);
+       jBAnularInscrip.setEnabled(false);
     }//GEN-LAST:event_jRBMateriasNoInscripActionPerformed
 
     private void jBInscribirseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInscribirseActionPerformed
@@ -254,7 +254,6 @@ public class formularioInscripcion extends javax.swing.JInternalFrame {
         for(Materia x: listM){
             modelo.addRow(new Object[] {x.getIdMateria(),x.getNombre(),x.getCuatrimestre()});
         }
-        System.out.println("alumno: "+sele+" lista: "+listM);
     }
     
      private void cargaMateriasIns(){
@@ -263,7 +262,6 @@ public class formularioInscripcion extends javax.swing.JInternalFrame {
         for(Materia x: list){
             modelo.addRow(new Object[] {x.getIdMateria(),x.getNombre(),x.getCuatrimestre()});
         }
-         System.out.println(sele+" :alumno "+list+" :lista ");
     }
     private void cargarAlumnos(){
         for(Alumno item: listA){

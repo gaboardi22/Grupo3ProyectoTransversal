@@ -18,6 +18,7 @@ public class MateriasVista extends javax.swing.JInternalFrame {
      */
     public MateriasVista() {
         initComponents();
+        
     }
 
     /**
