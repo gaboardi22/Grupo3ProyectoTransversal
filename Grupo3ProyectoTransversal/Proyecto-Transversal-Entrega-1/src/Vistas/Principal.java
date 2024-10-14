@@ -97,6 +97,11 @@ public class Principal extends javax.swing.JFrame {
         Administracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/administracion.png"))); // NOI18N
 
         jMIManDeInscripciones.setText("Manejo de inscripciones");
+        jMIManDeInscripciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIManDeInscripcionesActionPerformed(evt);
+            }
+        });
         Administracion.add(jMIManDeInscripciones);
 
         jMIManDeNotas.setText("Manipulación de notas");
@@ -157,6 +162,16 @@ public class Principal extends javax.swing.JFrame {
         fondo.add(vm);
         fondo.moveToFront(vm);
     }//GEN-LAST:event_JMIFormMateriaActionPerformed
+
+    private void jMIManDeInscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIManDeInscripcionesActionPerformed
+        // TODO add your handling code here:
+        fondo.removeAll();
+        fondo.repaint();
+        VistaInscripcion vi = new VistaInscripcion();
+        vi.setVisible(true);
+        fondo.add(vi);
+        fondo.moveToFront(vi);
+    }//GEN-LAST:event_jMIManDeInscripcionesActionPerformed
 
     /**
      * @param args the command line arguments

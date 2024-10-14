@@ -40,14 +40,18 @@ public class InscripcionData {
             ps.setInt(2, inscripcion.getMateria().getIdMateria());
             ps.setDouble(3, inscripcion.getNota());
             ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                inscripcion.setIdInscripcion(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Inscripcion guardada correctamente");
+            int filas = ps.executeUpdate();
+            if (filas > 0) {
+                JOptionPane.showMessageDialog(null, "Inscripcion guardada en la base de datos");
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion");
+            if (ex.getErrorCode() == 1062) { // Error de clave única duplicada
+                JOptionPane.showMessageDialog(null, "La inscripción ya existe");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción: " + ex.getMessage());
+            }
+
         }
 
     }
@@ -78,8 +82,9 @@ public class InscripcionData {
             if (filas == 1) {
                 JOptionPane.showMessageDialog(null, "Inscripcion borrada exitosamente");
             }
+            ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion1");
         }
 
     }
@@ -133,7 +138,7 @@ public class InscripcionData {
 
     public List<Materia> obtenerMateriasAlumno(int idAlumno) {
         ArrayList<Materia> materias = new ArrayList<>();
-        String sql = "SELECT inscripcion.idMateria, nombre, anio FROM inscripcion,"
+        String sql = "SELECT inscripcion.idMateria, nombre, anio, estado FROM inscripcion,"
                 + " materia WHERE inscripcion.idMateria = materia.idMateria "
                 + "AND inscripcion.idAlumno = ?";
         try {

@@ -215,10 +215,8 @@ public class VistaMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-        if(!jTFCodigo.getText().equals("") && materiaActual==null){
-        JOptionPane.showMessageDialog(this, "El codigo no hace falta ingresarlo, se va generar solo");
-        }
         try{
+          
         String nombre = jTFNombre.getText();
         Integer anio = Integer.parseInt(jTFAnio.getText());
         boolean estado = jRBEstado.isSelected();
@@ -226,7 +224,7 @@ public class VistaMateria extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No se puede dejar campos vacios");
         }
         if(materiaActual==null){
-        materiaActual = new Materia(nombre,anio,estado);
+        materiaActual = new Materia(-1,nombre,anio,estado);
         matData.guardarMateria(materiaActual);
         }else{
         materiaActual.setNombre(nombre);
