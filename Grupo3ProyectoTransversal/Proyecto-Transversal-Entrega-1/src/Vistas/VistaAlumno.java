@@ -6,6 +6,9 @@ package Vistas;
 
 import AccesoADatos.AlumnoData;
 import Entidades.Alumno;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,8 +16,10 @@ import javax.swing.JOptionPane;
  * @author Ezequiel
  */
 public class VistaAlumno extends javax.swing.JInternalFrame {
+
     private AlumnoData aluData = new AlumnoData();
     private Alumno alumnoActual = null;
+
     /**
      * Creates new form VistaAlumno
      */
@@ -59,17 +64,26 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
 
         jLEstado.setText("Estado: ");
 
-        jTFDNI.addActionListener(new java.awt.event.ActionListener() {
+        jBNuevo.setText("Nuevo");
+        jBNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFDNIActionPerformed(evt);
+                jBNuevoActionPerformed(evt);
             }
         });
 
-        jBNuevo.setText("Nuevo");
-
         jBEliminar.setText("Eliminar");
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarActionPerformed(evt);
+            }
+        });
 
         jBGuardar.setText("Guardar");
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardarActionPerformed(evt);
+            }
+        });
 
         jBSalir.setText("Salir");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -177,20 +191,72 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTFDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFDNIActionPerformed
-    }//GEN-LAST:event_jTFDNIActionPerformed
-
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-        try{
-        Integer dni = Integer.parseInt(jTFDNI.getText());
-        }catch(NumberFormatException ex){
-        JOptionPane.showMessageDialog(null, "Debe ingresar un numero valido");
+        try {
+            Integer dni = Integer.parseInt(jTFDNI.getText());
+            alumnoActual = aluData.buscarAlumnoPorDNI(dni);
+
+            if (alumnoActual != null) {
+                jTFApellido.setText(alumnoActual.getApellido());
+                jTFNombre.setText(alumnoActual.getNombre());
+                jRBEstado.setSelected(alumnoActual.isEstado());
+                LocalDate lc = alumnoActual.getFechaNac();
+                java.util.Date date = java.util.Date.from(lc.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                jDCFechaDeNacimiento.setDate(date);
+            } else {
+                limpiarCampos();
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un dni valido");
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
+
+    private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
+        limpiarCampos();
+        alumnoActual = null;
+    }//GEN-LAST:event_jBNuevoActionPerformed
+
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+        try {
+            Integer dni = Integer.parseInt(jTFDNI.getText());
+            String nombre = jTFNombre.getText();
+            String apellido = jTFApellido.getText();
+            if (nombre.isEmpty() || apellido.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No se puede dejar campos vacios");
+                return;
+            }
+            java.util.Date sfecha = jDCFechaDeNacimiento.getDate();
+            LocalDate fechaNac = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            boolean estado = jRBEstado.isSelected();
+            if (alumnoActual == null) {
+                alumnoActual = new Alumno(dni, nombre, apellido, fechaNac, estado);
+                aluData.guardarAlumno(alumnoActual);
+            } else {
+                alumnoActual.setDni(dni);
+                alumnoActual.setNombre(nombre);
+                alumnoActual.setApellido(apellido);
+                alumnoActual.setFechaNac(fechaNac);
+                alumnoActual.setEstado(estado);
+                aluData.modificarAlumno(alumnoActual);
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un dni valido");
+        }
+    }//GEN-LAST:event_jBGuardarActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        if (alumnoActual != null) {
+            aluData.eliminarAlumno(alumnoActual.getIdAlumno());
+            alumnoActual = null;
+            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay un alumno seleccionado");
+        }
+    }//GEN-LAST:event_jBEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -212,4 +278,11 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTFDNI;
     private javax.swing.JTextField jTFNombre;
     // End of variables declaration//GEN-END:variables
+    private void limpiarCampos() {
+        jTFDNI.setText("");
+        jTFApellido.setText("");
+        jTFNombre.setText("");
+        jRBEstado.setSelected(true);
+        jDCFechaDeNacimiento.setDate(new Date());
+    }
 }

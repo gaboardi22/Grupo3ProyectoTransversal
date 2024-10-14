@@ -4,12 +4,17 @@
  */
 package Vistas;
 
+import AccesoADatos.MateriaData;
+import Entidades.Materia;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Ezequiel
  */
 public class VistaMateria extends javax.swing.JInternalFrame {
-
+    MateriaData matData = new MateriaData();
+    Materia materiaActual = null;
     /**
      * Creates new form VistaMateria
      */
@@ -40,6 +45,7 @@ public class VistaMateria extends javax.swing.JInternalFrame {
         jBGuardar = new javax.swing.JButton();
         jBEliminar = new javax.swing.JButton();
         jBNuevo = new javax.swing.JButton();
+        jBBuscar = new javax.swing.JButton();
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -67,10 +73,32 @@ public class VistaMateria extends javax.swing.JInternalFrame {
         });
 
         jBGuardar.setText("Guardar");
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardarActionPerformed(evt);
+            }
+        });
 
         jBEliminar.setText("Eliminar");
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarActionPerformed(evt);
+            }
+        });
 
         jBNuevo.setText("Nuevo");
+        jBNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBNuevoActionPerformed(evt);
+            }
+        });
+
+        jBBuscar.setText("Buscar");
+        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -92,7 +120,10 @@ public class VistaMateria extends javax.swing.JInternalFrame {
                                     .addComponent(jLEstado))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jBBuscar))
                                     .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTFAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jRBEstado))))
@@ -116,7 +147,8 @@ public class VistaMateria extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLCodigo)
-                    .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBBuscar))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLNombre)
@@ -129,7 +161,7 @@ public class VistaMateria extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLEstado)
                     .addComponent(jRBEstado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBSalir)
                     .addComponent(jBGuardar)
@@ -160,8 +192,65 @@ public class VistaMateria extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
+        materiaActual=null;
+        this.limpiarCampos();
+    }//GEN-LAST:event_jBNuevoActionPerformed
+
+    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+        try{
+        Integer codigo = Integer.parseInt(jTFCodigo.getText());
+        materiaActual = matData.buscarMateria(codigo);
+        if(materiaActual!=null){
+        jTFCodigo.setText(String.valueOf(materiaActual.getIdMateria()));
+        jTFNombre.setText(materiaActual.getNombre());
+        jTFAnio.setText(String.valueOf(materiaActual.getAnio()));
+        jRBEstado.setSelected(materiaActual.isEstado());
+        }else{
+        this.limpiarCampos();
+        }
+        }catch(NumberFormatException ex){
+        JOptionPane.showMessageDialog(this, "Debe ingresar un codigo valido");
+        }
+    }//GEN-LAST:event_jBBuscarActionPerformed
+
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+        if(!jTFCodigo.getText().equals("") && materiaActual==null){
+        JOptionPane.showMessageDialog(this, "El codigo no hace falta ingresarlo, se va generar solo");
+        }
+        try{
+        String nombre = jTFNombre.getText();
+        Integer anio = Integer.parseInt(jTFAnio.getText());
+        boolean estado = jRBEstado.isSelected();
+        if(nombre.isEmpty() || jTFAnio.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "No se puede dejar campos vacios");
+        }
+        if(materiaActual==null){
+        materiaActual = new Materia(nombre,anio,estado);
+        matData.guardarMateria(materiaActual);
+        }else{
+        materiaActual.setNombre(nombre);
+        materiaActual.setAnio(anio);
+        materiaActual.setEstado(estado);
+        matData.modificarMateria(materiaActual);
+        }
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Ingrese un año valido");
+        }
+    }//GEN-LAST:event_jBGuardarActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        if(materiaActual!=null){
+            Integer codigo = Integer.parseInt(jTFCodigo.getText());
+            matData.eliminarMateria(codigo);
+        }else{
+        JOptionPane.showMessageDialog(this, "Materia no seleccionada");
+        }
+    }//GEN-LAST:event_jBEliminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBBuscar;
     private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBNuevo;
@@ -177,4 +266,10 @@ public class VistaMateria extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTFCodigo;
     private javax.swing.JTextField jTFNombre;
     // End of variables declaration//GEN-END:variables
+    private void limpiarCampos(){
+    jTFCodigo.setText("");
+    jTFNombre.setText("");
+    jTFAnio.setText("");
+    jRBEstado.setSelected(true);
+    }
 }

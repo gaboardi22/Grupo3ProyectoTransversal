@@ -32,10 +32,8 @@ public class MateriaData {
             ps.setString(1, materia.getNombre());
             ps.setInt(2, materia.getAnio());
             ps.setBoolean(3, materia.isEstado());
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                materia.setIdMateria(rs.getInt(1));
+            int filasAfectadas = ps.executeUpdate();
+            if (filasAfectadas > 0) {
                 JOptionPane.showMessageDialog(null, "Materia guardada en la base de datos");
             }
             ps.close();
@@ -79,10 +77,10 @@ public class MateriaData {
             ps.setString(1, materia.getNombre());
             ps.setInt(2, materia.getAnio());
             ps.setBoolean(3, materia.isEstado());
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                materia.setIdMateria(rs.getInt(1));
-                System.out.println("Materia modificada exitosamente");
+            ps.setInt(4, materia.getIdMateria());
+            int filasAfectadas = ps.executeUpdate();
+            if (filasAfectadas > 0) {
+                JOptionPane.showMessageDialog(null, "Materia modificado correctamente");
             }
             ps.close();
         } catch (SQLException ex) {
