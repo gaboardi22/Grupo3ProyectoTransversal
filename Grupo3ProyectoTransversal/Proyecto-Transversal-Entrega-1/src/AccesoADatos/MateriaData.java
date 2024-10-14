@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import Entidades.Materia;
+import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Connection;
 
 /**
@@ -35,11 +36,11 @@ public class MateriaData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 materia.setIdMateria(rs.getInt(1));
-                System.out.println("Materia guardada en la base de datos");
+                JOptionPane.showMessageDialog(null, "Materia guardada en la base de datos");
             }
             ps.close();
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla materia");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia");
         }
 
     }
@@ -60,12 +61,12 @@ public class MateriaData {
                 mat.setNombre(rs.getString("nombre"));
                 mat.setAnio(rs.getInt("anio"));
                 mat.setEstado(rs.getBoolean("estado"));
-            }else{
-                System.out.println("No existe ese alumno");
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe esa materia");
             }
             ps.close();
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla materia");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia");
         }
         return mat;
     }
@@ -81,12 +82,11 @@ public class MateriaData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 materia.setIdMateria(rs.getInt(1));
-                System.out.println("Materia guardada en la base de datos");
+                System.out.println("Materia modificada exitosamente");
             }
             ps.close();
-            System.out.println("Alumno modificado");
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla alumnos");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia");
         }
     }
 
@@ -98,9 +98,9 @@ public class MateriaData {
             ps.setInt(1, id);
             ps.executeUpdate();
             ps.close();
-            System.out.println("Materia dada de baja");
+            JOptionPane.showMessageDialog(null, "Materia dada de baja exitosamente");
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla materia");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia");
         }
     }
 
@@ -112,9 +112,9 @@ public class MateriaData {
             ps.setInt(1, id);
             ps.executeUpdate();
             ps.close();
-            System.out.println("Materia dada de alta");
+            JOptionPane.showMessageDialog(null, "Materia dada de alta exitosamente");
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla materia");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia");
         }
     }
 
@@ -125,9 +125,9 @@ public class MateriaData {
             ps.setInt(1, id);
             ps.executeUpdate();
             ps.close();
-            System.out.println("Materia borrada de la base de datos");
+            JOptionPane.showMessageDialog(null, "Materia borrada de la base de datos");
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla materia");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia");
         }
     }
 }

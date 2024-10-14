@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Connection;
 
 /**
@@ -42,11 +43,11 @@ public class InscripcionData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 inscripcion.setIdInscripcion(rs.getInt(1));
-                System.out.println("Inscripcion guardada en la base de datos");
+                JOptionPane.showMessageDialog(null, "Inscripcion guardada correctamente");
             }
             ps.close();
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla inscripcion");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion");
         }
 
     }
@@ -60,10 +61,10 @@ public class InscripcionData {
             ps.setInt(idMateria, 3);
             int filas = ps.executeUpdate();
             if (filas == 1) {
-                System.out.println("Nota actualizada");
+                JOptionPane.showMessageDialog(null, "Nota actualizada");
             }
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla inscripcion");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion");
         }
     }
 
@@ -75,10 +76,10 @@ public class InscripcionData {
             ps.setInt(2, idMateria);
             int filas = ps.executeUpdate();
             if (filas == 1) {
-                System.out.println("Inscripcion borrada correctamente");
+                JOptionPane.showMessageDialog(null, "Inscripcion borrada exitosamente");
             }
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla inscripcion");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion");
         }
 
     }
@@ -101,7 +102,7 @@ public class InscripcionData {
             }
             ps.close();
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla inscripcion");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion");
         }
         return cursadas;
     }
@@ -125,7 +126,7 @@ public class InscripcionData {
             }
             ps.close();
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla inscripcion");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion");
         }
         return cursadas;
     }
@@ -149,7 +150,7 @@ public class InscripcionData {
             }
             ps.close();
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla inscripcion");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion");
         }
         return materias;
     }
@@ -172,12 +173,12 @@ public class InscripcionData {
             }
             ps.close();
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla inscripcion");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion");
         }
         return materias;
     }
-    
-    public List<Alumno> obtenerAlumnoXMateria(int idMateria){
+
+    public List<Alumno> obtenerAlumnoXMateria(int idMateria) {
         ArrayList<Alumno> listado = new ArrayList<>();
         String sql = "SELECT a.idAlumno, dni, nombre, apellido, fechaNac, estado "
                 + "FROM inscripcion i,alumno a WHERE i.idAlumno= a.idAlumno AND idMateria = ? a.estado = 1";
@@ -185,18 +186,18 @@ public class InscripcionData {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, idMateria);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-            Alumno alu = new Alumno();
-            alu.setIdAlumno(rs.getInt("idAlumno"));
-            alu.setDni(rs.getInt("dni"));
-            alu.setApellido(rs.getString("apellido"));
-            alu.setNombre(rs.getString("nombre"));
-            alu.setFechaNac(rs.getDate("FechaNac").toLocalDate());
-            alu.setEstado(rs.getBoolean("estado"));
-            listado.add(alu);
+            while (rs.next()) {
+                Alumno alu = new Alumno();
+                alu.setIdAlumno(rs.getInt("idAlumno"));
+                alu.setDni(rs.getInt("dni"));
+                alu.setApellido(rs.getString("apellido"));
+                alu.setNombre(rs.getString("nombre"));
+                alu.setFechaNac(rs.getDate("FechaNac").toLocalDate());
+                alu.setEstado(rs.getBoolean("estado"));
+                listado.add(alu);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion");
         }
         return listado;
     }

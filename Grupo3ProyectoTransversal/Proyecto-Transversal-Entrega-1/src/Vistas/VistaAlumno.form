@@ -37,7 +37,7 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="45" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="jBNuevo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jBEliminar" min="-2" max="-2" attributes="0"/>
@@ -57,14 +57,22 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jDCFechaDeNacimiento" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRBEstado" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTFApellido" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
-                              <Component id="jTFNombre" min="-2" pref="175" max="-2" attributes="0"/>
-                              <Component id="jTFDNI" min="-2" pref="175" max="-2" attributes="0"/>
-                              <Component id="jLAlumno" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jDCFechaDeNacimiento" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jRBEstado" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jTFApellido" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
+                                      <Component id="jTFNombre" min="-2" pref="175" max="-2" attributes="0"/>
+                                      <Component id="jLAlumno" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jTFDNI" min="-2" pref="175" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jBBuscar" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -80,6 +88,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLDNI" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTFDNI" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -185,6 +194,14 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Alumno"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jBBuscar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Buscar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBBuscarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

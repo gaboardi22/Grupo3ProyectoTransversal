@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import Entidades.Alumno;
+import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Connection;
 
 /**
@@ -40,12 +41,12 @@ public class AlumnoData {
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next()) {
                     alumno.setIdAlumno(rs.getInt(1));
-                    System.out.println("Alumno guardado en la base de datos");
+                    JOptionPane.showMessageDialog(null, "Alumno guardado correctamente");
                 }
                 ps.close();
             }
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla alumnos");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumnos");
         }
     }
 
@@ -62,12 +63,12 @@ public class AlumnoData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 alumno.setIdAlumno(rs.getInt(1));
-                System.out.println("Alumno guardado en la base de datos");
+                JOptionPane.showMessageDialog(null, "Alumno modificado correctamente");
             }
             ps.close();
             System.out.println("Alumno modificado");
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla alumnos");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumnos");
         }
     }
 
@@ -91,12 +92,12 @@ public class AlumnoData {
                 alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
                 alumno.setEstado(rs.getBoolean("estado"));
 
-            }else{
-                System.out.println("No existe ese alumno");
+            } else {
+                JOptionPane.showMessageDialog(null, "Alumno inexistente");
             }
             ps.close();
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla alumnos");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumnos");
         }
         return alumno;
     }
@@ -109,9 +110,9 @@ public class AlumnoData {
             ps.setInt(1, id);
             ps.executeUpdate();
             ps.close();
-            System.out.println("Alumno dado de baja");
+            JOptionPane.showMessageDialog(null, "Alumno dado de baja");
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla alumnos");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumnos");
         }
     }
 
@@ -123,9 +124,9 @@ public class AlumnoData {
             ps.setInt(1, id);
             ps.executeUpdate();
             ps.close();
-            System.out.println("Alumno dado de alta");
+            JOptionPane.showMessageDialog(null, "Alumno dado de alta");
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla alumnos");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumnos");
         }
     }
 
@@ -136,9 +137,9 @@ public class AlumnoData {
             ps.setInt(1, id);
             ps.executeUpdate();
             ps.close();
-            System.out.println("Alumno borrado de la base de datos");
+            JOptionPane.showMessageDialog(null, "Alumno eliminado de la base de datos");
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla alumnos");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumnos");
         }
     }
 }
