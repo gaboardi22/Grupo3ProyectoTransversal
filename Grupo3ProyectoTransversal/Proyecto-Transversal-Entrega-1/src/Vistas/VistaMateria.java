@@ -279,6 +279,6 @@ public class VistaMateria extends javax.swing.JInternalFrame {
     jTFCodigo.setText("Solo para buscar");
     jTFNombre.setText("");
     jTFAnio.setText("");
-    jRBEstado.setSelected(true);
+    jRBEstado.setSelected(false);
     }
 }

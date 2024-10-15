@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-10-2024 a las 00:47:08
+-- Tiempo de generación: 15-10-2024 a las 17:49:40
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -38,6 +38,15 @@ CREATE TABLE `alumnos` (
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `alumnos`
+--
+
+INSERT INTO `alumnos` (`idAlumno`, `dni`, `nombre`, `apellido`, `fechaNac`, `estado`) VALUES
+(1, 45070640, 'Ezequiel', 'Aravena', '2003-08-09', 1),
+(2, 12345678, 'Pablo', 'Gaboardi', '2000-04-26', 1),
+(3, 23456789, 'Maira', 'Lorenzoni', '2001-10-03', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -65,6 +74,17 @@ CREATE TABLE `materia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `materia`
+--
+
+INSERT INTO `materia` (`idMateria`, `nombre`, `anio`, `estado`) VALUES
+(1, 'Lengua y literatura', 1, 1),
+(2, 'Matematica', 1, 0),
+(3, 'Lengua 2', 2, 1),
+(4, 'Matematica 2', 2, 1),
+(5, 'Carpinteria', 1, 1);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -80,7 +100,8 @@ ALTER TABLE `alumnos`
 --
 ALTER TABLE `inscripcion`
   ADD PRIMARY KEY (`idInscripcion`),
-  ADD KEY `idAlumno` (`idAlumno`),
+  ADD UNIQUE KEY `idAlumno` (`idAlumno`,`idMateria`),
+  ADD UNIQUE KEY `uc_inscripcion` (`idAlumno`,`idMateria`),
   ADD KEY `idMateria` (`idMateria`);
 
 --
@@ -97,7 +118,7 @@ ALTER TABLE `materia`
 -- AUTO_INCREMENT de la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
-  MODIFY `idAlumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idAlumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `inscripcion`
@@ -109,7 +130,7 @@ ALTER TABLE `inscripcion`
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `idMateria` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idMateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas

@@ -100,6 +100,11 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTMaterias);
 
         jBSalir.setText("Salir");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
+            }
+        });
 
         jBInscribir.setText("Inscribir");
         jBInscribir.setEnabled(false);
@@ -232,6 +237,10 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
             borrarFilaTabla();
         }
     }//GEN-LAST:event_jBAnularInscripcionActionPerformed
+
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jBSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
