@@ -35,7 +35,6 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
         modelo = new DefaultTableModel();
         this.cargarAlumnos();
         this.armarCabeceraTabla();
-
     }
 
     /**

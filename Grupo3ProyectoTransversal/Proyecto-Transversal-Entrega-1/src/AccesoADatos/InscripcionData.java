@@ -62,7 +62,7 @@ public class InscripcionData {
             java.sql.PreparedStatement ps = conn.prepareStatement(sql);
             ps.setDouble(1, not);
             ps.setInt(2, idAlumno);
-            ps.setInt(idMateria, 3);
+            ps.setInt(3, idMateria);
             int filas = ps.executeUpdate();
             if (filas == 1) {
                 JOptionPane.showMessageDialog(null, "Nota actualizada");

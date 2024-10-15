@@ -105,11 +105,21 @@ public class Principal extends javax.swing.JFrame {
         Administracion.add(jMIManDeInscripciones);
 
         jMIManDeNotas.setText("Manipulación de notas");
+        jMIManDeNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIManDeNotasActionPerformed(evt);
+            }
+        });
         Administracion.add(jMIManDeNotas);
 
         jMenuBar1.add(Administracion);
 
         JMConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/consulta.png"))); // NOI18N
+        JMConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMConsultasActionPerformed(evt);
+            }
+        });
 
         jMIAlumnoPorMateria.setText("Alumnos por materia");
         JMConsultas.add(jMIAlumnoPorMateria);
@@ -172,6 +182,19 @@ public class Principal extends javax.swing.JFrame {
         fondo.add(vi);
         fondo.moveToFront(vi);
     }//GEN-LAST:event_jMIManDeInscripcionesActionPerformed
+
+    private void jMIManDeNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIManDeNotasActionPerformed
+        fondo.removeAll();
+        fondo.repaint();
+        VistaNotas vn = new VistaNotas();
+        vn.setVisible(true);
+        fondo.add(vn);
+        fondo.moveToFront(vn);
+    }//GEN-LAST:event_jMIManDeNotasActionPerformed
+
+    private void JMConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMConsultasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JMConsultasActionPerformed
 
     /**
      * @param args the command line arguments
