@@ -8,8 +8,7 @@ import org.mariadb.jdbc.Connection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -178,7 +177,7 @@ public class InscripcionData {
        public List<Alumno> obtenerAlumnosPorAmaterias(int idMateria){
            ArrayList<Alumno> alumnosMaterias = new ArrayList<>();
            String sql = "SELECT a.idAlumno, nombre, apellido, fechaNacimiento, estado FROM inscripcion i , alumno a"
-                   + " WHERE i.idAlumno = a.idAlumno AND idMateria = ? NAD estado = 1";
+                   + " WHERE i.idAlumno = a.idAlumno AND idMateria = ? AND estado = 1";
          try {
              PreparedStatement ps = conn.prepareStatement(sql);
              ps.setInt(1, idMateria);
