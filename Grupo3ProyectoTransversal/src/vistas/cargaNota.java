@@ -4,17 +4,40 @@
  */
 package vistas;
 
+import Entidades.Alumno;
+import Entidades.Inscripcion;
+import EntidadesData.AlumnoData;
+import EntidadesData.InscripcionData;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Usuario
  */
 public class cargaNota extends javax.swing.JInternalFrame {
 
+    private List<Inscripcion> listaIns;
+    private List<Alumno> listaA;
+
+    private InscripcionData inscData;
+    private AlumnoData aluData;
+
+    private DefaultTableModel modelo;
+
     /**
      * Creates new form cargaNota
      */
     public cargaNota() {
         initComponents();
+        aluData = new AlumnoData();
+        inscData = new InscripcionData();
+        listaA = aluData.listarAlumnos();
+        modelo = new DefaultTableModel();
+        this.cargarAlumnos();
+        this.armarCabeceraTabla();
+        this.cargarDatos();
     }
 
     /**
@@ -61,8 +84,11 @@ public class cargaNota extends javax.swing.JInternalFrame {
 
         jBGuardarNotas.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jBGuardarNotas.setText("Guardar");
-
-        jCBoxNotas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jBGuardarNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardarNotasActionPerformed(evt);
+            }
+        });
 
         jBSalirNotas.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jBSalirNotas.setText("Salir");
@@ -125,18 +151,53 @@ public class cargaNota extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalirNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirNotasActionPerformed
-         dispose();
+        dispose();
     }//GEN-LAST:event_jBSalirNotasActionPerformed
+
+    private void jBGuardarNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarNotasActionPerformed
+        int filaSeleccionada = jTNotas.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            int idAlumno = listaIns.get(filaSeleccionada).getAlumno().getIdAlumno();
+            double nota = Double.parseDouble(modelo.getValueAt(filaSeleccionada, 2).toString());
+            int idMateria = listaIns.get(filaSeleccionada).getMateria().getIdMateria();
+            inscData.actualizarNota(idAlumno, idMateria, nota);
+        }
+    }//GEN-LAST:event_jBGuardarNotasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBGuardarNotas;
     private javax.swing.JButton jBSalirNotas;
-    private javax.swing.JComboBox<String> jCBoxNotas;
+    private javax.swing.JComboBox<Alumno> jCBoxNotas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTNotas;
     // End of variables declaration//GEN-END:variables
+    private void cargarAlumnos() {
+        for (Alumno alumno : listaA) {
+            jCBoxNotas.addItem(alumno);
+        }
+    }
+
+    private void armarCabeceraTabla() {
+        ArrayList<Object> filaCabecera = new ArrayList<>();
+        filaCabecera.add("Codigo");
+        filaCabecera.add("Nombre");
+        filaCabecera.add("Nota");
+        for (Object object : filaCabecera) {
+            modelo.addColumn(object);
+        }
+        jTNotas.setModel(modelo);
+    }
+
+    private void cargarDatos() {
+        Alumno selec = (Alumno) jCBoxNotas.getSelectedItem();
+        listaIns = (ArrayList) inscData.obtenerInscripcionesPorAlumno(selec.getIdAlumno());
+        modelo.setRowCount(0);
+        for (Inscripcion insc : listaIns) {
+            modelo.addRow(new Object[]{insc.getIdInscripcion(), insc.getMateria().getNombre(), insc.getNota()});
+        }
+    }
 }
