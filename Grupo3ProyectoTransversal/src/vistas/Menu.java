@@ -1,9 +1,7 @@
-
 package vistas;
 
 import com.formdev.flatlaf.*;
 import com.formdev.flatlaf.intellijthemes.*;
-
 
 /**
  *
@@ -44,6 +42,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 480));
 
         javax.swing.GroupLayout jDPMenuLayout = new javax.swing.GroupLayout(jDPMenu);
         jDPMenu.setLayout(jDPMenuLayout);
@@ -118,9 +117,9 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.add(jMConsulta);
 
         jMSalir.setText("Salir");
-        jMSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMSalirActionPerformed(evt);
+        jMSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMSalirMouseClicked(evt);
             }
         });
         jMenuBar1.add(jMSalir);
@@ -139,6 +138,7 @@ public class Menu extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMIAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIAlumnoActionPerformed
@@ -169,7 +169,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMIInscriActionPerformed
 
     private void jMINotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMINotasActionPerformed
-       jDPMenu.removeAll();
+        jDPMenu.removeAll();
         jDPMenu.repaint();
         cargaNota n = new cargaNota();
         n.setVisible(true);
@@ -186,9 +186,9 @@ public class Menu extends javax.swing.JFrame {
         jDPMenu.moveToFront(n);
     }//GEN-LAST:event_jMIConsuXmateriaActionPerformed
 
-    private void jMSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMSalirActionPerformed
-         System.exit(0);
-    }//GEN-LAST:event_jMSalirActionPerformed
+    private void jMSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMSalirMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jMSalirMouseClicked
 
     /**
      * @param args the command line arguments
@@ -228,7 +228,7 @@ public class Menu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new Menu().setVisible(true);
-    });
+        });
         FlatArcOrangeIJTheme.setup();
     }
 
