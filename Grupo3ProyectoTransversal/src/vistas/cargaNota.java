@@ -10,6 +10,7 @@ import EntidadesData.AlumnoData;
 import EntidadesData.InscripcionData;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -90,6 +91,12 @@ public class cargaNota extends javax.swing.JInternalFrame {
             }
         });
 
+        jCBoxNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBoxNotasActionPerformed(evt);
+            }
+        });
+
         jBSalirNotas.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jBSalirNotas.setText("Salir");
         jBSalirNotas.addActionListener(new java.awt.event.ActionListener() {
@@ -157,12 +164,23 @@ public class cargaNota extends javax.swing.JInternalFrame {
     private void jBGuardarNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarNotasActionPerformed
         int filaSeleccionada = jTNotas.getSelectedRow();
         if (filaSeleccionada != -1) {
-            int idAlumno = listaIns.get(filaSeleccionada).getAlumno().getIdAlumno();
-            double nota = Double.parseDouble(modelo.getValueAt(filaSeleccionada, 2).toString());
-            int idMateria = listaIns.get(filaSeleccionada).getMateria().getIdMateria();
-            inscData.actualizarNota(idAlumno, idMateria, nota);
+            try {
+                int idAlumno = listaIns.get(filaSeleccionada).getAlumno().getIdAlumno();
+                double nota = Double.parseDouble(modelo.getValueAt(filaSeleccionada, 2).toString());
+                int idMateria = listaIns.get(filaSeleccionada).getMateria().getIdMateria();
+                inscData.actualizarNota(idAlumno, idMateria, nota);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Error al parsear la nota");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila válida");
         }
+
     }//GEN-LAST:event_jBGuardarNotasActionPerformed
+
+    private void jCBoxNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBoxNotasActionPerformed
+        cargarDatos();
+    }//GEN-LAST:event_jCBoxNotasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -194,10 +212,14 @@ public class cargaNota extends javax.swing.JInternalFrame {
 
     private void cargarDatos() {
         Alumno selec = (Alumno) jCBoxNotas.getSelectedItem();
-        listaIns = (ArrayList) inscData.obtenerInscripcionesPorAlumno(selec.getIdAlumno());
-        modelo.setRowCount(0);
-        for (Inscripcion insc : listaIns) {
-            modelo.addRow(new Object[]{insc.getIdInscripcion(), insc.getMateria().getNombre(), insc.getNota()});
+        if (selec != null) {
+            listaIns = (ArrayList) inscData.obtenerInscripcionesPorAlumno(selec.getIdAlumno());
+            modelo.setRowCount(0);
+            for (Inscripcion insc : listaIns) {
+                modelo.addRow(new Object[]{insc.getIdInscripcion(), insc.getMateria().getNombre(), insc.getNota()});
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un alumno");
         }
     }
 }
